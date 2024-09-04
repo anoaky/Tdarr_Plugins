@@ -107,4 +107,18 @@ const details = (): IpluginDetails => ({
             tooltip: 'Continue to next plugin',
         },
     ],
-})
+});
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const plugin = async (args: IpluginInputArgs): Promise<IpluginOutputArgs> => {
+    return {
+        outputFileObj: args.inputFileObj,
+        outputNumber: 1,
+        variables: args.variables,
+    };
+};
+
+export {
+    details,
+    plugin,
+};
