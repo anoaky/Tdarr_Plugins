@@ -44,7 +44,7 @@ const details = (): IpluginDetails => ({
         },
         {
             label: 'Endpoint',
-            name: 'endpoint',
+            name: 'endpointPost',
             type: 'string',
             defaultValue: 'Create Encoding',
             inputUI: {
@@ -73,7 +73,7 @@ const details = (): IpluginDetails => ({
         },
         {
             label: 'Endpoint',
-            name: 'endpoint',
+            name: 'endpointGet',
             type: 'string',
             defaultValue: 'Get Encoding',
             tooltip: 'Select an API endpoint to access.',
