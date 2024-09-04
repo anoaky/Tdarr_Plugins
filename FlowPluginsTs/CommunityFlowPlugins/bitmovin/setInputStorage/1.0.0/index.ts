@@ -1,12 +1,8 @@
-import {
-    IpluginDetails,
-    IpluginInputArgs,
-    IpluginOutputArgs,
-} from '../../../../FlowHelpers/1.0.0/interfaces/interfaces';
+import { IpluginDetails, IpluginInputArgs, IpluginOutputArgs } from "../../../../FlowHelpers/1.0.0/interfaces/interfaces";
 
 const details = (): IpluginDetails => ({
-    name: 'Begin Bitmovin Request',
-    description: 'Begin constructing a request to the Bitmovin API. Must be placed before any other Bitmovin plugins, but does not need to be placed again in any of its descendants.',
+    name: 'Set Input Storage',
+    description: 'Set the ID for the storage device that holds the input file.',
     style: {
         borderColor: 'blue',
     },
@@ -18,11 +14,11 @@ const details = (): IpluginDetails => ({
     icon: 'faArrowRight',
     inputs: [
         {
-            label: 'API Key',
-            name: 'apiKey',
+            label: 'Storage device ID',
+            name: 'inputID',
             type: 'string',
             defaultValue: '',
-            tooltip: 'Enter your Bitmovin API key.',
+            tooltip: 'Enter the ID for the storage device.',
             inputUI: {
                 type: 'text',
             },
@@ -31,20 +27,17 @@ const details = (): IpluginDetails => ({
     outputs: [
         {
             number: 1,
-            tooltip: 'Continue to next plugin',
+            tooltip: 'Continue to next plugin.',
         },
     ],
 });
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const plugin = async (args: IpluginInputArgs): Promise<IpluginOutputArgs> => {
     const lib = require('../../../../../methods/lib')();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
     args.inputs = lib.loadDefaultValues(args.inputs, details);
 
-    const apiKey = String(args.inputs.apiKey);
-    args.variables.user.apiKey = apiKey;
-
+    args.variables.user.inputID = String(args.inputs.inputID);
     return {
         outputFileObj: args.inputFileObj,
         outputNumber: 1,

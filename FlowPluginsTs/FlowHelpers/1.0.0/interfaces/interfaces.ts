@@ -6,7 +6,7 @@ export interface IpluginInputUi {
     // boolean inputs will default to a switch
     type: 'dropdown' | 'text' | 'textarea' | 'directory' | 'slider' | 'switch',
     options?: string[],
-    sliderOptions?: {max: number, min: number, }
+    sliderOptions?: { max: number, min: number, }
     style?: Record<string, unknown>,
     onSelect?: {
         [index: string]: {
@@ -111,7 +111,7 @@ export interface Ivariables {
     user: Record<string, string>,
     healthCheck?: 'Success',
     queueTags?: string,
-    liveSizeCompare?: IliveSizeCompare
+    liveSizeCompare?: IliveSizeCompare,
 }
 
 export interface IpluginOutputArgs {
