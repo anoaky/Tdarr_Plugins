@@ -35,3 +35,8 @@ const plugin = async (args: IpluginInputArgs): Promise<IpluginOutputArgs> => {
         variables: args.variables,
     }
 }
+
+export {
+    details,
+    plugin,
+}
