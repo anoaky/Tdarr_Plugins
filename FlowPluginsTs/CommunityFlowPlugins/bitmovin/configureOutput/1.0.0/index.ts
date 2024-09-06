@@ -14,7 +14,7 @@ const details = (): IpluginDetails => ({
     icon: 'faArrowRight',
     inputs: [
         {
-            label: 'Storage device ID',
+            label: 'Output storage device ID',
             name: 'outputID',
             type: 'string',
             defaultValue: '',
