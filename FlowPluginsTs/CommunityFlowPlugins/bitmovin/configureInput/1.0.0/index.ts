@@ -74,6 +74,7 @@ const plugin = async (args: IpluginInputArgs): Promise<IpluginOutputArgs> => {
     const lib = require('../../../../../methods/lib')();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
     args.inputs = lib.loadDefaultValues(args.inputs, details);
+    const bitmovin = args.variables.bitmovinConfig!;
 
     const videoConfig = new Av1VideoConfiguration({
         name: 'AV1 Batch',
@@ -83,9 +84,9 @@ const plugin = async (args: IpluginInputArgs): Promise<IpluginOutputArgs> => {
         bitrate: 96000,
     });
 
-    await args.variables.bitmovinConfig.addConfig(videoConfig);
-    await args.variables.bitmovinConfig.addConfig(audioConfig);
-    await args.variables.bitmovinConfig.setInput(String(args.inputs.inputID), String(args.inputs.inputPath));
+    await bitmovin.addConfig(videoConfig);
+    await bitmovin.addConfig(audioConfig);
+    await bitmovin.setInput(String(args.inputs.inputID), String(args.inputs.inputPath));
 
     return {
         outputFileObj: args.inputFileObj,
