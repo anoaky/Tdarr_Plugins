@@ -7,7 +7,7 @@ export default class BitmovinConfig {
     private input?: Input;
     private inputPath?: string;
     private output?: EncodingOutput;
-    private outpathPath?: string;
+    private outputPath?: string;
     private encodings: Array<Encoding> = [];
 
     constructor(apiKey: string) {
@@ -47,9 +47,9 @@ export default class BitmovinConfig {
 
             let muxOutPath: string;
             if (config instanceof VideoConfiguration) {
-                muxOutPath = `${this.outpathPath!}/video/${(config as VideoConfiguration).height}`;
+                muxOutPath = `${this.outputPath!}/video/${(config as VideoConfiguration).height}`;
             } else {
-                muxOutPath = `${this.outpathPath!}/audio/${(config as AudioConfiguration).bitrate! / 1000}`;
+                muxOutPath = `${this.outputPath!}/audio/${(config as AudioConfiguration).bitrate! / 1000}`;
             }
             const muxStream = new MuxingStream({
                 streamId: stream.id,
@@ -75,6 +75,16 @@ export default class BitmovinConfig {
     public async setInput(id: string, path: string) {
         this.input = await this.api.encoding.inputs.get(id);
         this.inputPath = path;
+        return this;
+    }
+
+    public async setOutput(id: string, path: string) {
+        const output = await this.api.encoding.outputs.get(id);
+        this.output = new EncodingOutput({
+            outputId: output.id,
+            outputPath: path,
+        });
+        this.outputPath = path;
         return this;
     }
 }
