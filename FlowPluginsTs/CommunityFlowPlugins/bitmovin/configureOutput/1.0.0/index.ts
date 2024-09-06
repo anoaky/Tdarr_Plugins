@@ -28,7 +28,7 @@ const details = (): IpluginDetails => ({
             name: 'outputPath',
             type: 'string',
             defaultValue: '',
-            tooltip: '',
+            tooltip: 'empty',
             inputUI: {
                 type: 'text',
             },
