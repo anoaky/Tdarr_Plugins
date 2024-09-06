@@ -1,8 +1,9 @@
+import BitmovinConfig from "../../../../FlowHelpers/1.0.0/bitmovinConfig";
 import { IpluginDetails, IpluginInputArgs, IpluginOutputArgs } from "../../../../FlowHelpers/1.0.0/interfaces/interfaces";
 
 const details = (): IpluginDetails => ({
-    name: 'Set Input Storage',
-    description: 'Set the ID for the storage device that holds the input file.',
+    name: 'Start Bitmovin Encoding',
+    description: '',
     style: {
         borderColor: 'blue',
     },
@@ -12,18 +13,7 @@ const details = (): IpluginDetails => ({
     requiresVersion: '2.24.05',
     sidebarPosition: -1,
     icon: 'faArrowRight',
-    inputs: [
-        {
-            label: 'Storage device ID',
-            name: 'inputID',
-            type: 'string',
-            defaultValue: '',
-            tooltip: 'Enter the ID for the storage device.',
-            inputUI: {
-                type: 'text',
-            },
-        },
-    ],
+    inputs: [],
     outputs: [
         {
             number: 1,
@@ -36,16 +26,11 @@ const plugin = async (args: IpluginInputArgs): Promise<IpluginOutputArgs> => {
     const lib = require('../../../../../methods/lib')();
     // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
     args.inputs = lib.loadDefaultValues(args.inputs, details);
-
-    args.variables.user.inputID = String(args.inputs.inputID);
+    const bitmovin = args.variables.bitmovinConfig;
+    await bitmovin.startEncodings();
     return {
         outputFileObj: args.inputFileObj,
         outputNumber: 1,
         variables: args.variables,
-    };
-};
-
-export {
-    details,
-    plugin,
-};
+    }
+}

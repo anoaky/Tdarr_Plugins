@@ -1,3 +1,4 @@
+import BitmovinConfig from '../bitmovinConfig';
 import { IscanTypes } from '../fileUtils';
 import { IFileObject, IFileObjectMin, Istreams } from './synced/IFileObject';
 import Ijob from './synced/jobInterface';
@@ -112,6 +113,7 @@ export interface Ivariables {
     healthCheck?: 'Success',
     queueTags?: string,
     liveSizeCompare?: IliveSizeCompare,
+    bitmovinConfig: BitmovinConfig,
 }
 
 export interface IpluginOutputArgs {

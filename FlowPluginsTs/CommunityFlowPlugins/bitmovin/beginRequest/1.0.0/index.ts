@@ -1,3 +1,4 @@
+import BitmovinConfig from '../../../../FlowHelpers/1.0.0/bitmovinConfig';
 import {
     IpluginDetails,
     IpluginInputArgs,
@@ -42,8 +43,7 @@ const plugin = async (args: IpluginInputArgs): Promise<IpluginOutputArgs> => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
     args.inputs = lib.loadDefaultValues(args.inputs, details);
 
-    const apiKey = String(args.inputs.apiKey);
-    args.variables.user.apiKey = apiKey;
+    args.variables.bitmovinConfig = new BitmovinConfig(String(args.inputs.apiKey));
 
     return {
         outputFileObj: args.inputFileObj,
