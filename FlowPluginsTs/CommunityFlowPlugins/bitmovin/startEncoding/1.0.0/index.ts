@@ -28,7 +28,7 @@ const plugin = async (args: IpluginInputArgs): Promise<IpluginOutputArgs> => {
     args.inputs = lib.loadDefaultValues(args.inputs, details);
     const bitmovin = args.variables.bitmovinConfig;
     await bitmovin.addEncoding('test');
-    await bitmovin.startEncodings();
+    await bitmovin.startEncoding();
     return {
         outputFileObj: args.inputFileObj,
         outputNumber: 1,

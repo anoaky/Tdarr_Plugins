@@ -127,11 +127,10 @@ const plugin = async (args: IpluginInputArgs): Promise<IpluginOutputArgs> => {
     await bitmovin.setInput(String(args.inputs.inputID), String(args.inputs.inputPath));
 
     // Configure output
-    bitmovin.setOutput(String(args.inputs.outputID), String(args.inputs.outputPath));
+    await bitmovin.setOutput(String(args.inputs.outputID), String(args.inputs.outputPath));
 
     // Start encoding
-    await bitmovin.addEncoding('test');
-    await bitmovin.startEncodings();
+    (await bitmovin.addEncoding('test')).startEncoding();
 
     return {
         outputFileObj: args.inputFileObj,

@@ -8,7 +8,7 @@ export default class BitmovinConfig {
     private inputPath?: string;
     private output?: EncodingOutput;
     private outputPath?: string;
-    private encodings: Array<Encoding> = [];
+    private encoding?: Encoding;
 
     constructor(apiKey: string) {
         this.config.apiKey = apiKey;
@@ -64,12 +64,8 @@ export default class BitmovinConfig {
         return this;
     }
 
-    public async startEncodings() {
-        let jobs: Array<Promise<BitmovinResponse>> = [];
-        for (const encoding of this.encodings) {
-            jobs.concat(this.api.encoding.encodings.start(encoding.id!));
-        }
-        return Promise.all(jobs);
+    public async startEncoding() {
+        return this.api.encoding.encodings.start(this.encoding!.id!);
     }
 
     public async setInput(id: string, path: string) {
