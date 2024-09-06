@@ -27,6 +27,7 @@ const plugin = async (args: IpluginInputArgs): Promise<IpluginOutputArgs> => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars,no-param-reassign
     args.inputs = lib.loadDefaultValues(args.inputs, details);
     const bitmovin = args.variables.bitmovinConfig;
+    await bitmovin.addEncoding('test');
     await bitmovin.startEncodings();
     return {
         outputFileObj: args.inputFileObj,

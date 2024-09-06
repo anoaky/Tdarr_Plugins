@@ -51,6 +51,16 @@ const details = (): IpluginDetails => ({
                 ],
             },
         },
+        {
+            label: 'Input path',
+            name: 'inputPath',
+            type: 'string',
+            defaultValue: '',
+            tooltip: 'Enter path to input file.',
+            inputUI: {
+                type: 'text',
+            },
+        },
     ],
     outputs: [
         {
@@ -73,9 +83,9 @@ const plugin = async (args: IpluginInputArgs): Promise<IpluginOutputArgs> => {
         bitrate: 96000,
     });
 
-    await args.variables.bitmovinConfig.setVConfig(videoConfig);
-    await args.variables.bitmovinConfig.addAConfig(audioConfig);
-    await args.variables.bitmovinConfig.setInput(String(args.inputs.inputID));
+    await args.variables.bitmovinConfig.addConfig(videoConfig);
+    await args.variables.bitmovinConfig.addConfig(audioConfig);
+    await args.variables.bitmovinConfig.setInput(String(args.inputs.inputID), String(args.inputs.inputPath));
 
     return {
         outputFileObj: args.inputFileObj,
